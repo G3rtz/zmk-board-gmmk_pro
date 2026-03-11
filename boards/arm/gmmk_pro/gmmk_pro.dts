@@ -16,7 +16,7 @@
  *   SPI1:    PA5 (SCK), PA6 (MOSI), PA7 (MISO) [for AW20216S]
  *   AW20216S CS: PB13, PB14; Enable: PC13
  */
-
+/dts-v1/;
 #include <dt-bindings/zmk/matrix_transform.h>
 #include <st/f3/stm32f303Xc.dtsi>
 #include <st/f3/stm32f303c(b-c)tx-pinctrl.dtsi>
