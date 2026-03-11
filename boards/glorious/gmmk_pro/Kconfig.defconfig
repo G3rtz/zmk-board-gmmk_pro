@@ -1,0 +1,12 @@
+# Copyright (c) 2025 G3rtz
+# SPDX-License-Identifier: MIT
+
+if BOARD_GMMK_PRO
+
+config ZMK_KEYBOARD_NAME
+    default "GMMK Pro"
+
+config ZMK_KSCAN_MATRIX_POLLING
+    default y
+
+endif # BOARD_GMMK_PRO

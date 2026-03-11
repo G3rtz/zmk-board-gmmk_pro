@@ -1,0 +1,7 @@
+board:
+  name: gmmk_pro
+  vendor: glorious
+  socs:
+    - name: stm32f303xc
+      variants:
+        - name: zmk

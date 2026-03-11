@@ -1,0 +1,15 @@
+identifier: gmmk_pro
+name: GMMK Pro
+type: keyboard
+arch: arm
+toolchain:
+  - zephyr
+  - gnuarmemb
+  - xtools
+ram: 40
+supported:
+  - gpio
+  - spi
+  - usb_device
+  - nvs
+  - kscan
