@@ -1,4 +1,4 @@
-name: zmk-board-gmmk_pro
+name: zmk-board-gmmk-pro
 build:
   settings:
     board_root: .

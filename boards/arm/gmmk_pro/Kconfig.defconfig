@@ -1,7 +1,15 @@
-if BOARD_GMMK_PRO
-    config ZMK_KEYBOARD_NAME
-        default "GMMK Pro"
+# Copyright (c) 2025 G3rtz
+# SPDX-License-Identifier: MIT
 
-    config ZMK_KSCAN_MATRIX_POLLING
-        default y
-endif
+if BOARD_GMMK_PRO
+
+config ZMK_KEYBOARD_NAME
+    default "GMMK Pro"
+
+config ZMK_USB
+    default y
+
+config ZMK_KSCAN_MATRIX_POLLING
+    default y
+
+endif # BOARD_GMMK_PRO

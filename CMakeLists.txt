@@ -1,6 +1,2 @@
-zephyr_library_amend()
-
-zephyr_library_sources_ifdef(CONFIG_ZMK_KSCAN_EC_MATRIX zmk_kscan_ec_matrix.c)
-zephyr_library_sources_ifdef(CONFIG_ZMK_KSCAN_EC_MATRIX_SETTINGS ec_matrix_settings.c)
-zephyr_library_sources_ifdef(CONFIG_ZMK_KSCAN_EC_MATRIX_SHELL ec_matrix_shell.c)
-list(APPEND EXTRA_DTC_FLAGS "-qq")
+# Copyright (c) 2025 G3rtz
+# SPDX-License-Identifier: MIT
