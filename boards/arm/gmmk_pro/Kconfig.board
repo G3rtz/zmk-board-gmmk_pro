@@ -1,0 +1,6 @@
+# Copyright (c) 2025 G3rtz
+# SPDX-License-Identifier: MIT
+
+config BOARD_GMMK_PRO
+    def_bool $(boards_list_contains,gmmk_pro)
+    depends on SOC_STM32F303XC
