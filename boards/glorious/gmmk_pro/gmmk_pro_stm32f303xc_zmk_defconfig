@@ -15,9 +15,6 @@ CONFIG_CLOCK_CONTROL=y
 # USB
 CONFIG_ZMK_USB=y
 
-# Mark this board target as explicitly ZMK-compatible (Zephyr 4.1 check)
-CONFIG_ZMK_BOARD_COMPAT=y
-
 # Encoder
 CONFIG_EC11=y
 CONFIG_EC11_TRIGGER_GLOBAL_THREAD=y

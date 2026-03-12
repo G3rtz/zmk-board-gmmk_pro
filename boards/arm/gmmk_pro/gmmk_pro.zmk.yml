@@ -1,12 +1,12 @@
 file_format: "1"
-id: gmmk_pro//zmk
+id: gmmk_pro
 name: GMMK Pro
 type: board
 arch: arm
+url: https://www.pcgamingrace.com/products/glorious-gmmk-pro-75-barebone-black-reservation
 features:
   - keys
   - encoder
   - underglow
 outputs:
   - usb
-url: https://www.pcgamingrace.com/products/glorious-gmmk-pro-75-barebone-black-reservation
