@@ -62,6 +62,7 @@ manifest:
     - name: zmk-module-aw20216s
       remote: g3rtz
       revision: main
+      submodules: true
   self:
     path: config
 ```
@@ -76,7 +77,7 @@ include:
 
 ## Enabling RGB / AW20216S
 
-1. Ensure `zmk-module-aw20216s` is present in `config/west.yml`.
+1. Ensure `zmk-module-aw20216s` is present in `config/west.yml` with `submodules: true`.
 2. Refresh dependencies:
 
    ```sh
@@ -105,7 +106,7 @@ This board includes `CONFIG_ZMK_BOARD_COMPAT=y` in both board targets and ZMK va
 
 ### 3) AW20216S / RGB not compiling or missing
 This is a known ecosystem pain point while support evolves. Ensure:
-- `zmk-module-aw20216s` is present in your manifest,
+- `zmk-module-aw20216s` is present in your manifest with `submodules: true`,
 - overlays actually enable SPI/AW20216S nodes,
 - your module and ZMK revisions are mutually compatible.
 
