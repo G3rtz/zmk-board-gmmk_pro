@@ -6,7 +6,6 @@ arch: arm
 features:
   - keys
   - encoder
-  - underglow
 outputs:
   - usb
 url: https://www.pcgamingrace.com/products/glorious-gmmk-pro-75-barebone-black-reservation
