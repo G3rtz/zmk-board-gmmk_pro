@@ -4,7 +4,6 @@
 # applying SoC/variant qualifiers. Keep ZMK board-compat enabled here so
 # Zephyr 4.1 compatibility checks succeed in that path as well.
 
-CONFIG_BOARD_GMMK_PRO=y
 CONFIG_SOC_SERIES_STM32F3X=y
 CONFIG_SOC_STM32F303XC=y
 
