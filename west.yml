@@ -13,4 +13,4 @@ manifest:
       remote: g3rtz
       revision: main
   self:
-    path: config
+    path: .

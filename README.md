@@ -71,7 +71,7 @@ Then in your `build.yaml`:
 ```yaml
 ---
 include:
-  - board: gmmk_pro
+  - board: gmmk_pro/stm32f303xc/zmk
 ```
 
 
