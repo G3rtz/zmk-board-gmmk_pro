@@ -4,17 +4,23 @@ manifest:
       url-base: https://github.com/zmkfirmware
     - name: g3rtz
       url-base: https://github.com/G3rtz
+
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+
+    # Board module.
     - name: zmk-board-gmmk-pro
       remote: g3rtz
       revision: main
+
+    # Optional AW20216S support module for RGB enablement.
     - name: zmk-module-aw20216s
       remote: g3rtz
       revision: main
 
+  # Canonical user-config manifest location.
   self:
     path: config
