@@ -22,7 +22,7 @@ manifest:
       remote: g3rtz
       revision: main
       submodules:
-        - path: drivers
+        - drivers
 
   # Canonical user-config manifest location.
   self:
