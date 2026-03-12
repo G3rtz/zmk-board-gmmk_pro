@@ -12,10 +12,13 @@ manifest:
       import: app/west.yml
 
     # AW20216S support module for RGB enablement.
+    # Use explicit submodule path checkout so drivers/Kconfig is available
+    # during Zephyr Kconfig parsing.
     - name: zmk-module-aw20216s
       remote: g3rtz
       revision: main
-      submodules: true
+      submodules:
+        - path: drivers
 
   # Repo-local development manifest.
   self:
