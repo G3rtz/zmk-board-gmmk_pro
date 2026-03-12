@@ -1,0 +1,17 @@
+# Base board fallback config for GMMK Pro.
+#
+# Some build paths first resolve the base board target (`gmmk_pro`) before
+# applying SoC/variant qualifiers. Keep ZMK board-compat enabled here so
+# Zephyr 4.1 compatibility checks succeed in that path as well.
+
+CONFIG_BOARD_GMMK_PRO=y
+CONFIG_SOC_SERIES_STM32F3X=y
+CONFIG_SOC_STM32F303XC=y
+
+CONFIG_CLOCK_CONTROL=y
+CONFIG_SYS_CLOCK_HW_CYCLES_PER_SEC=72000000
+
+CONFIG_ZMK_USB=y
+CONFIG_ZMK_BOARD_COMPAT=y
+
+CONFIG_ZMK_HID_REPORT_TYPE_NKRO=y
