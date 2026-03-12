@@ -40,7 +40,9 @@ ZMK board definition for the [Glorious GMMK Pro](https://www.pcgamingrace.com/pr
 
 ## Usage
 
-Add this module to your `config/west.yml`:
+Für einen normalen ZMK-User-Config-Workflow ist **`config/west.yml` der kanonische Manifest-Pfad** (dort löst `west update` im Build-Workflow auf).
+
+Füge dort dieses Board-Modul hinzu:
 
 ```yaml
 manifest:
@@ -57,6 +59,9 @@ manifest:
     - name: zmk-board-gmmk-pro
       remote: g3rtz
       revision: main
+    - name: zmk-module-aw20216s
+      remote: g3rtz
+      revision: main
   self:
     path: config
 ```
@@ -68,6 +73,26 @@ Then in your `build.yaml`:
 include:
   - board: gmmk_pro
 ```
+
+
+## RGB/AW20216S aktivieren
+
+1. Stelle sicher, dass `zmk-module-aw20216s` in `config/west.yml` eingetragen ist (siehe Manifest-Beispiel oben).
+2. Hole alle Abhängigkeiten neu:
+
+   ```sh
+   west update
+   ```
+
+3. Aktiviere die benötigten Build-Optionen in deiner User-Config (z. B. in `config/<shield>.conf` oder `config/board.conf`) und ergänze ggf. ein Overlay, das die AW20216S-Knoten aktiviert.
+
+   Typischerweise brauchst du:
+   - RGB/Underglow einschalten (Kconfig),
+   - AW20216S/SPI-Knoten im DTS-Overlay auf `status = "okay"` setzen.
+
+4. Neu bauen (`west build ...` oder GitHub Actions Build).
+
+Erwartete Features mit aktivem AW20216S-Modul sind RGB-Underglow und perspektivisch Per-Key-RGB (abhängig von der finalen ZMK-Treiber-/Konfigurationsunterstützung).
 
 ## Status
 
