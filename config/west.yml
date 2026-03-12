@@ -9,6 +9,9 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    - name: zmk-board-gmmk-pro
+      remote: g3rtz
+      revision: main
     - name: zmk-module-aw20216s
       remote: g3rtz
       revision: main
