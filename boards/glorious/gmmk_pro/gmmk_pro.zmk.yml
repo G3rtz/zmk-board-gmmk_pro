@@ -1,5 +1,5 @@
 file_format: "1"
-id: gmmk_pro/stm32f303xc/zmk
+id: gmmk_pro/stm32f303xc
 name: GMMK Pro
 type: board
 arch: arm
