@@ -18,7 +18,7 @@ manifest:
       remote: g3rtz
       revision: main
       submodules:
-        - path: drivers
+        - drivers
 
   # Repo-local development manifest.
   self:
