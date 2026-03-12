@@ -151,7 +151,7 @@
     };
 };
 
-zephyr_udc0: &usb {
+&usb {
     pinctrl-0 = <&usb_dm_pa11 &usb_dp_pa12>;
     pinctrl-names = "default";
     status = "okay";
@@ -175,24 +175,4 @@ zephyr_udc0: &usb {
     ahb-prescaler = <1>;
     apb1-prescaler = <2>;
     apb2-prescaler = <1>;
-};
-
-&spi1 {
-    status = "okay";
-    pinctrl-0 = <&spi1_sck_pa5 &spi1_mosi_pa7>;
-    pinctrl-names = "default";
-    cs-gpios = <&gpiob 13 GPIO_ACTIVE_LOW>, <&gpiob 14 GPIO_ACTIVE_LOW>;
-
-    led_matrix_0: aw20216s@0 {
-        compatible = "awinic,aw20216s";
-        reg = <0>;
-        spi-max-frequency = <10000000>;
-        enable-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
-    };
-
-    led_matrix_1: aw20216s@1 {
-        compatible = "awinic,aw20216s";
-        reg = <1>;
-        spi-max-frequency = <10000000>;
-    };
 };
