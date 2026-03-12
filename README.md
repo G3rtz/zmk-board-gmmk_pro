@@ -44,8 +44,6 @@ Für einen normalen ZMK-User-Config-Workflow ist **`config/west.yml` der kanonis
 
 Füge dort dieses Board-Modul hinzu:
 
-> Hinweis: Für User-Config-Repos (inkl. dieses Build-Workflows) bleibt `self.path: config` korrekt, damit der `config/`-Pfad von ZMK Actions konsistent aufgelöst wird.
-
 ```yaml
 manifest:
   remotes:
