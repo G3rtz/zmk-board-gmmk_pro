@@ -2,11 +2,16 @@ manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
+    - name: g3rtz
+      url-base: https://github.com/G3rtz
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
+    - name: zmk-module-aw20216s
+      remote: g3rtz
+      revision: main
 
   self:
-    path: config
+    path: .
