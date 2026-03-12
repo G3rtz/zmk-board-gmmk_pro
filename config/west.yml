@@ -16,10 +16,11 @@ manifest:
       remote: g3rtz
       revision: main
 
-    # Optional AW20216S support module for RGB enablement.
+    # AW20216S support module for RGB enablement.
     - name: zmk-module-aw20216s
       remote: g3rtz
       revision: main
+      submodules: true
 
   # Canonical user-config manifest location.
   self:

@@ -11,10 +11,11 @@ manifest:
       revision: main
       import: app/west.yml
 
-    # Optional AW20216S support module for RGB enablement.
+    # AW20216S support module for RGB enablement.
     - name: zmk-module-aw20216s
       remote: g3rtz
       revision: main
+      submodules: true
 
   # Repo-local development manifest.
   self:
