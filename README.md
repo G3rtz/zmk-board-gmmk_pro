@@ -62,7 +62,8 @@ manifest:
     - name: zmk-module-aw20216s
       remote: g3rtz
       revision: main
-      submodules: true
+      submodules:
+        - path: drivers
   self:
     path: config
 ```
@@ -77,15 +78,24 @@ include:
 
 ## Enabling RGB / AW20216S
 
-1. Ensure `zmk-module-aw20216s` is present in `config/west.yml` with `submodules: true`.
+1. Ensure `zmk-module-aw20216s` is present in your manifest with explicit driver submodule checkout:
+
+   ```yaml
+   - name: zmk-module-aw20216s
+     remote: g3rtz
+     revision: main
+     submodules:
+       - path: drivers
+   ```
+
 2. Refresh dependencies:
 
    ```sh
    west update
    ```
 
-3. Enable required options in your user config (`config/<shield>.conf` or `config/board.conf`) and add overlays enabling AW20216S nodes as needed.
-4. Build again (`west build ...` or GitHub Actions build).
+3. Verify the module checkout contains `zmk-module-aw20216s/drivers/Kconfig` before building.
+4. Enable required options in your user config (`config/<shield>.conf` or `config/board.conf`) and add overlays enabling AW20216S nodes as needed.
 
 Expected with the AW20216S module: RGB underglow and (eventually) per-key RGB, depending on current ZMK driver support.
 
@@ -106,7 +116,8 @@ This board includes `CONFIG_ZMK_BOARD_COMPAT=y` in both board targets and ZMK va
 
 ### 3) AW20216S / RGB not compiling or missing
 This is a known ecosystem pain point while support evolves. Ensure:
-- `zmk-module-aw20216s` is present in your manifest with `submodules: true`,
+- `zmk-module-aw20216s` is present in your manifest with `submodules: [{ path: drivers }]` (or equivalent),
+- your module checkout includes `drivers/Kconfig`,
 - overlays actually enable SPI/AW20216S nodes,
 - your module and ZMK revisions are mutually compatible.
 

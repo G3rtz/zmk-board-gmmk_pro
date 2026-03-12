@@ -17,10 +17,12 @@ manifest:
       revision: main
 
     # AW20216S support module for RGB enablement.
+    # Explicit submodule path keeps drivers/Kconfig available for Kconfig.
     - name: zmk-module-aw20216s
       remote: g3rtz
       revision: main
-      submodules: true
+      submodules:
+        - path: drivers
 
   # Canonical user-config manifest location.
   self:
