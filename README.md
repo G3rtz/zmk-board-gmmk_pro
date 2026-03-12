@@ -2,47 +2,47 @@
 
 ZMK board definition for the [Glorious GMMK Pro](https://www.pcgamingrace.com/products/glorious-gmmk-pro-75-barebone-black-reservation) keyboard.
 
-## Hardware
+## Hardware Overview
 
 | Feature | Details |
-|---------|---------|
-| MCU | STM32F303CCT6 (ARM Cortex-M4, 72 MHz) |
+|---|---|
+| MCU | STM32F303CCT6 (ARM Cortex-M4 @ 72 MHz) |
 | Flash | 256 KB |
 | RAM | 40 KB |
-| Matrix | 11 rows × 8 columns (col2row) |
+| Matrix | 11 rows × 8 columns (`col2row`) |
 | Keys | 83 (ANSI layout) |
 | Encoder | Alps EC11 (volume knob) |
-| LED Driver | 2× AW20216S via SPI1 (not yet supported) |
-| USB VID:PID | 0x320F:0x5044 |
+| LED Driver | 2× AW20216S via SPI1 (module support required) |
+| USB VID:PID | `0x320F:0x5044` |
 | Bootloader | STM32 DFU |
 
 ## Pin Mapping
 
 ### Matrix
-- **Columns (outputs):** PA0, PA1, PA2, PA3, PA4, PA8, PA9, PA10
-- **Rows (inputs):** PB0–PB10
+- **Columns (outputs):** `PA0`, `PA1`, `PA2`, `PA3`, `PA4`, `PA8`, `PA9`, `PA10`
+- **Rows (inputs):** `PB0`–`PB10`
 
 ### Encoder
-- **A:** PC15
-- **B:** PC14
+- **A:** `PC15`
+- **B:** `PC14`
 
 ### USB
-- **DM:** PA11
-- **DP:** PA12
+- **DM:** `PA11`
+- **DP:** `PA12`
 
 ### LED Driver (SPI1)
-- **SCK:** PA5
-- **MOSI:** PA6 (note: QMK calls this MOSI)
-- **MISO:** PA7
-- **CS1:** PB13 (AW20216S #1)
-- **CS2:** PB14 (AW20216S #2)
-- **EN:** PC13
+- **SCK:** `PA5`
+- **MOSI:** `PA6`
+- **MISO:** `PA7`
+- **CS1:** `PB13` (AW20216S #1)
+- **CS2:** `PB14` (AW20216S #2)
+- **EN:** `PC13`
 
 ## Usage
 
-Für einen normalen ZMK-User-Config-Workflow ist **`config/west.yml` der kanonische Manifest-Pfad** (dort löst `west update` im Build-Workflow auf).
+For a standard ZMK user-config workflow, **`config/west.yml` is the canonical manifest path**.
 
-Füge dort dieses Board-Modul hinzu:
+Add this board module there:
 
 ```yaml
 manifest:
@@ -74,35 +74,50 @@ include:
   - board: gmmk_pro/stm32f303xc/zmk
 ```
 
+## Enabling RGB / AW20216S
 
-## RGB/AW20216S aktivieren
-
-1. Stelle sicher, dass `zmk-module-aw20216s` in `config/west.yml` eingetragen ist (siehe Manifest-Beispiel oben).
-2. Hole alle Abhängigkeiten neu:
+1. Ensure `zmk-module-aw20216s` is present in `config/west.yml`.
+2. Refresh dependencies:
 
    ```sh
    west update
    ```
 
-3. Aktiviere die benötigten Build-Optionen in deiner User-Config (z. B. in `config/<shield>.conf` oder `config/board.conf`) und ergänze ggf. ein Overlay, das die AW20216S-Knoten aktiviert.
+3. Enable required options in your user config (`config/<shield>.conf` or `config/board.conf`) and add overlays enabling AW20216S nodes as needed.
+4. Build again (`west build ...` or GitHub Actions build).
 
-   Typischerweise brauchst du:
-   - RGB/Underglow einschalten (Kconfig),
-   - AW20216S/SPI-Knoten im DTS-Overlay auf `status = "okay"` setzen.
+Expected with the AW20216S module: RGB underglow and (eventually) per-key RGB, depending on current ZMK driver support.
 
-4. Neu bauen (`west build ...` oder GitHub Actions Build).
+## Build Troubleshooting
 
-Erwartete Features mit aktivem AW20216S-Modul sind RGB-Underglow und perspektivisch Per-Key-RGB (abhängig von der finalen ZMK-Treiber-/Konfigurationsunterstützung).
+### 1) `west: command not found`
+Install West in your Python environment:
+
+```sh
+python3 -m pip install --user west
+```
+
+### 2) `error: BOARD ... is not marked as ZMK compatible`
+This board includes `CONFIG_ZMK_BOARD_COMPAT=y` in both board targets and ZMK variant defconfig. If you still hit this:
+- confirm your manifest pulled the latest board revision,
+- run `west update`,
+- remove stale build directories before rebuilding.
+
+### 3) AW20216S / RGB not compiling or missing
+This is a known ecosystem pain point while support evolves. Ensure:
+- `zmk-module-aw20216s` is present in your manifest,
+- overlays actually enable SPI/AW20216S nodes,
+- your module and ZMK revisions are mutually compatible.
 
 ## Status
 
 - [x] Matrix scanning (83 keys)
 - [x] Encoder (Alps EC11)
 - [x] USB HID
-- [x] N-Key Rollover
+- [x] N-key rollover
 - [x] Flash storage (NVS)
-- [ ] RGB underglow (AW20216S driver needed)
-- [ ] Per-key RGB (AW20216S driver needed)
+- [ ] RGB underglow (AW20216S integration dependent)
+- [ ] Per-key RGB (AW20216S integration dependent)
 
 ## License
 
