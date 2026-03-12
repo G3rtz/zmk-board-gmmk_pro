@@ -44,8 +44,6 @@ Für einen normalen ZMK-User-Config-Workflow ist **`config/west.yml` der kanonis
 
 Füge dort dieses Board-Modul hinzu:
 
-> Hinweis: Die Repository-Manifeste in **diesem** Repo (für GitHub Actions) verwenden `self.path: .`, damit das lokale Board-Modul im CI-Build aufgelöst wird. Für normale User-Config-Repos bleibt `self.path: config` korrekt.
-
 ```yaml
 manifest:
   remotes:

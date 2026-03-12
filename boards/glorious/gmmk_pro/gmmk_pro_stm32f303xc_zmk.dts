@@ -103,6 +103,39 @@
         sensors = <&encoder0>;
         triggers-per-rotation = <20>;
     };
+
+    /*
+     * AW20216S LED driver - prepared for future ZMK support
+     * Two AW20216S chips on SPI1:
+     *   SPI1_SCK  = PA5
+     *   SPI1_MOSI = PA6
+     *   SPI1_MISO = PA7
+     *   CS1 = PB13, CS2 = PB14
+     *   EN  = PC13
+     *
+     * Uncomment when ZMK gains AW20216S driver support,
+     * or use with the zmk-module-aw20216s module.
+     */
+
+    // &spi1 {
+    //     status = "okay";
+    //     pinctrl-0 = <&spi1_sck_pa5 &spi1_mosi_pa6 &spi1_miso_pa7>;
+    //     pinctrl-names = "default";
+    //     cs-gpios = <&gpiob 13 GPIO_ACTIVE_LOW>, <&gpiob 14 GPIO_ACTIVE_LOW>;
+    //
+    //     led_matrix_0: aw20216s@0 {
+    //         compatible = "awinic,aw20216s";
+    //         reg = <0>;
+    //         spi-max-frequency = <10000000>;
+    //         enable-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+    //     };
+    //
+    //     led_matrix_1: aw20216s@1 {
+    //         compatible = "awinic,aw20216s";
+    //         reg = <1>;
+    //         spi-max-frequency = <10000000>;
+    //     };
+    // };
 };
 
 &flash0 {
@@ -142,4 +175,24 @@ zephyr_udc0: &usb {
     ahb-prescaler = <1>;
     apb1-prescaler = <2>;
     apb2-prescaler = <1>;
+};
+
+&spi1 {
+    status = "okay";
+    pinctrl-0 = <&spi1_sck_pa5 &spi1_mosi_pa7>;
+    pinctrl-names = "default";
+    cs-gpios = <&gpiob 13 GPIO_ACTIVE_LOW>, <&gpiob 14 GPIO_ACTIVE_LOW>;
+
+    led_matrix_0: aw20216s@0 {
+        compatible = "awinic,aw20216s";
+        reg = <0>;
+        spi-max-frequency = <10000000>;
+        enable-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+    };
+
+    led_matrix_1: aw20216s@1 {
+        compatible = "awinic,aw20216s";
+        reg = <1>;
+        spi-max-frequency = <10000000>;
+    };
 };
