@@ -6,14 +6,14 @@
  * MCU: STM32F303CCT6 (ARM Cortex-M4, 72 MHz, 256KB Flash, 40KB RAM)
  * Matrix: 11 rows x 8 columns, col2row diodes
  * Encoder: Alps EC11 on PC14/PC15
- * LED Driver: AW20216S x2 via SPI (currently unsupported in ZMK)
+ * LED Driver: AW20216S x2 via Zephyr SPI bitbang + zmk-module-aw20216s
  *
  * Pin mapping verified against QMK keyboard.json:
  *   Columns: PA0-PA4, PA8-PA10 (active high, active drive)
  *   Rows:    PB0-PB10 (active low, active sense)
  *   Encoder: PC15 (A), PC14 (B)
  *   USB:     PA11 (DM), PA12 (DP)
- *   SPI1:    PA5 (SCK), PA6 (MOSI), PA7 (MISO) [for AW20216S]
+ *   AW bus:  PA5 (SCK), PA6 (MOSI), PA7 (MISO) [bitbang SPI]
  *   AW20216S CS: PB13, PB14; Enable: PC13
  */
 
@@ -31,6 +31,7 @@
         zephyr,flash = &flash0;
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
+        zmk,underglow = &led_matrix_0;
     };
 
     /*
@@ -103,6 +104,38 @@
         sensors = <&encoder0>;
         triggers-per-rotation = <20>;
     };
+    /*
+     * The GMMK Pro routes the AW20216S data lines as QMK documents them:
+     * SCK=PA5, MOSI=PA6, MISO=PA7. On STM32F303 hardware SPI1 PA6 is the
+     * peripheral MISO pin, so use Zephyr's SPI bitbang controller to drive the
+     * actual board MOSI line instead of the STM32 SPI1 alternate-function pins.
+     */
+    aw20216s_spi: aw20216s_spi {
+        compatible = "zephyr,spi-bitbang";
+        status = "okay";
+        clk-gpios = <&gpioa 5 GPIO_ACTIVE_HIGH>;
+        mosi-gpios = <&gpioa 6 GPIO_ACTIVE_HIGH>;
+        miso-gpios = <&gpioa 7 GPIO_ACTIVE_HIGH>;
+        cs-gpios = <&gpiob 13 GPIO_ACTIVE_LOW>, <&gpiob 14 GPIO_ACTIVE_LOW>;
+        clock-frequency = <1000000>;
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        led_matrix_0: aw20216s@0 {
+            compatible = "awinic,aw20216s";
+            reg = <0>;
+            spi-max-frequency = <1000000>;
+            enable-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+        };
+
+        led_matrix_1: aw20216s@1 {
+            compatible = "awinic,aw20216s";
+            reg = <1>;
+            spi-max-frequency = <1000000>;
+            enable-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+        };
+    };
+
 };
 
 &flash0 {
