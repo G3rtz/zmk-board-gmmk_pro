@@ -1,3 +1,6 @@
 ---
 include:
+  # STM32 – Split Peripheral (Matrix, Encoder, RGB)
   - board: gmmk_pro/stm32f303xc/zmk
+  # nice!nano v2 – Split Central (BLE/USB zum Host, Keymap)
+  - board: nice_nano_v2
