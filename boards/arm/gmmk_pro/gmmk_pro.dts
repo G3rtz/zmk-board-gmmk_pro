@@ -30,6 +30,7 @@
         zephyr,flash = &flash0;
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
+        zmk,underglow = &led_matrix_0;
     };
 
     /*
@@ -116,25 +117,26 @@
      * or use with the zmk-module-aw20216s module.
      */
 
-    // &spi1 {
-    //     status = "okay";
-    //     pinctrl-0 = <&spi1_sck_pa5 &spi1_mosi_pa7>;
-    //     pinctrl-names = "default";
-    //     cs-gpios = <&gpiob 13 GPIO_ACTIVE_LOW>, <&gpiob 14 GPIO_ACTIVE_LOW>;
-    //
-    //     led_matrix_0: aw20216s@0 {
-    //         compatible = "awinic,aw20216s";
-    //         reg = <0>;
-    //         spi-max-frequency = <10000000>;
-    //         enable-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
-    //     };
-    //
-    //     led_matrix_1: aw20216s@1 {
-    //         compatible = "awinic,aw20216s";
-    //         reg = <1>;
-    //         spi-max-frequency = <10000000>;
-    //     };
-    // };
+    &spi1 {
+        status = "okay";
+        /* PA5=SCK, PA6=MOSI (war fälschlich PA7), PA7=MISO */
+        pinctrl-0 = <&spi1_sck_pa5 &spi1_mosi_pa6 &spi1_miso_pa7>;
+        pinctrl-names = "default";
+        cs-gpios = <&gpiob 13 GPIO_ACTIVE_LOW>, <&gpiob 14 GPIO_ACTIVE_LOW>;
+
+        led_matrix_0: aw20216s@0 {
+            compatible = "awinic,aw20216s";
+            reg = <0>;
+            spi-max-frequency = <10000000>;
+            enable-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+        };
+
+        led_matrix_1: aw20216s@1 {
+            compatible = "awinic,aw20216s";
+            reg = <1>;
+            spi-max-frequency = <10000000>;
+        };
+    };
 };
 
 &flash0 {

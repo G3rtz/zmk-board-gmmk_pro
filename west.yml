@@ -9,10 +9,8 @@ manifest:
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    # AW20216S driver is kept available in the ecosystem but intentionally
-    # not included in this manifest.
-    # - name: zmk-module-aw20216s
-    #   remote: g3rtz
-    #   revision: main
+    - name: zmk-module-aw20216s
+      remote: g3rtz
+      revision: main
   self:
     path: config
