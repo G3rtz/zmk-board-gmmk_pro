@@ -12,9 +12,5 @@ manifest:
     - name: zmk-module-aw20216s
       remote: g3rtz
       revision: main
-    # UART-basierter Split-Transport (kabelgebundenes Split über USART3)
-    - name: zmk-split-serial
-      remote: g3rtz
-      revision: main
   self:
     path: config

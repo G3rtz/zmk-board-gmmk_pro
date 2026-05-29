@@ -1,0 +1,16 @@
+/*
+ * DTS-Overlay für nice!nano v2 als Split Central
+ * UART0: P0.06 (TX) → PC11 STM32, P0.08 (RX) ← PC10 STM32
+ */
+
+&uart0 {
+    current-speed = <115200>;
+    status = "okay";
+};
+
+/ {
+    wired_split: wired_split {
+        compatible = "zmk,wired-split";
+        uart = <&uart0>;
+    };
+};
