@@ -2,3 +2,4 @@ name: zmk-board-gmmk-pro
 build:
   settings:
     board_root: .
+    dts_root: .

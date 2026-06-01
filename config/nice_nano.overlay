@@ -1,17 +1,28 @@
 /*
- * DTS-Overlay für nice!nano v2 als Split Central
- * Nutzt pro_micro_serial (= UART mit vorkonfigurierten Pin-Belegungen
- * auf P0.06 TX / P0.08 RX – die D0/D1 Pro-Micro-Pins des nice!nano).
+ * DTS-Overlay für nice!nano als Split Central (Dongle-Rolle).
+ *
+ * Der Central hat keine eigene Matrix – er empfängt Tastenpositionen
+ * vom STM32-Peripheral über UART. Trotzdem braucht ZMK hier den
+ * Matrix-Transform, um die Keymap-Größe zu bestimmen.
+ *
+ * pro_micro_serial nutzt die vorkonfigurierten UART-Pins
+ * (P0.06 TX / P0.08 RX, die D0/D1 Pro-Micro-Pins des nice!nano).
  */
 
-&pro_micro_serial {
-    current-speed = <115200>;
-    status = "okay";
-};
+#include <gmmk_pro_transform.dtsi>
 
 / {
+    chosen {
+        zmk,matrix-transform = &default_transform;
+    };
+
     wired_split: wired_split {
         compatible = "zmk,wired-split";
         device = <&pro_micro_serial>;
     };
+};
+
+&pro_micro_serial {
+    current-speed = <115200>;
+    status = "okay";
 };
