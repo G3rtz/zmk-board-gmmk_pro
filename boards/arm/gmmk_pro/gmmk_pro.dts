@@ -147,6 +147,17 @@ zephyr_udc0: &usb {
 };
 
 /* USART3 auf PC10 (TX) / PC11 (RX) für Split-Verbindung zum nice!nano */
+/* PC10/PC11 fehlen in stm32f303c(b-c)tx-pinctrl.dtsi → eigene Definition */
+&pinctrl {
+    usart3_tx_pc10: usart3_tx_pc10 {
+        pinmux = <STM32_PINMUX('C', 10, AF7)>;
+        bias-pull-up;
+    };
+    usart3_rx_pc11: usart3_rx_pc11 {
+        pinmux = <STM32_PINMUX('C', 11, AF7)>;
+    };
+};
+
 &usart3 {
     pinctrl-0 = <&usart3_tx_pc10 &usart3_rx_pc11>;
     pinctrl-names = "default";
