@@ -11,6 +11,6 @@
 / {
     wired_split: wired_split {
         compatible = "zmk,wired-split";
-        uart = <&uart0>;
+        device = <&uart0>;
     };
 };

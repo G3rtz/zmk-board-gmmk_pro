@@ -158,7 +158,7 @@ zephyr_udc0: &usb {
 / {
     wired_split: wired_split {
         compatible = "zmk,wired-split";
-        uart = <&usart3>;
+        device = <&usart3>;
     };
 };
 
