@@ -155,21 +155,18 @@ Double-tap RESET to enter bootloader, then copy `build/zephyr/zmk.uf2` to the `N
 
 ## Config (`config/west.yml`)
 
+The AW20216S LED driver is part of ZMK mainline — no extra module is needed.
+
 ```yaml
 manifest:
   remotes:
     - name: zmkfirmware
       url-base: https://github.com/zmkfirmware
-    - name: g3rtz
-      url-base: https://github.com/G3rtz
   projects:
     - name: zmk
       remote: zmkfirmware
       revision: main
       import: app/west.yml
-    - name: zmk-module-aw20216s
-      remote: g3rtz
-      revision: main
   self:
     path: config
 ```
