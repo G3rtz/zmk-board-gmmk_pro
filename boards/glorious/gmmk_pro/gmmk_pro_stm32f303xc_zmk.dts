@@ -31,7 +31,6 @@
         zephyr,flash = &flash0;
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
-        zmk,underglow = &led_matrix_0;
     };
 
     /*
@@ -117,7 +116,6 @@
         mosi-gpios = <&gpioa 6 GPIO_ACTIVE_HIGH>;
         miso-gpios = <&gpioa 7 GPIO_ACTIVE_HIGH>;
         cs-gpios = <&gpiob 13 GPIO_ACTIVE_LOW>, <&gpiob 14 GPIO_ACTIVE_LOW>;
-        clock-frequency = <1000000>;
         #address-cells = <1>;
         #size-cells = <0>;
 
@@ -125,14 +123,14 @@
             compatible = "awinic,aw20216s";
             reg = <0>;
             spi-max-frequency = <1000000>;
-            enable-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+            en-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
         };
 
         led_matrix_1: aw20216s@1 {
             compatible = "awinic,aw20216s";
             reg = <1>;
             spi-max-frequency = <1000000>;
-            enable-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
+            en-gpios = <&gpioc 13 GPIO_ACTIVE_HIGH>;
         };
     };
 
