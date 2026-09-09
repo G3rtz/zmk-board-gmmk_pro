@@ -11,6 +11,6 @@ manifest:
       import: app/west.yml
     - name: zmk-module-aw20216s
       remote: g3rtz
-      revision: 724adc819f27280bcb2b4c77ec8de6d159278113
+      revision: a5f501fb41557687b2f4f43500da983ce8b432d0
   self:
     path: config
